@@ -1,6 +1,6 @@
 function addRandomSegment() {
-    const index1 = Math.floor(Math.random() * graph.points.lenght)
-    const index2 = Math.floor(Math.random() * graph.points.lenght)
+    const index1 = Math.floor(Math.random() * graph.points.length)
+    const index2 = Math.floor(Math.random() * graph.points.length)
 
     let success = false
     if (index1 != index2) {
@@ -11,6 +11,7 @@ function addRandomSegment() {
     }
     ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
     graph.draw(ctx);
+    console.log(success)
 }
 function addRandomPoint() {
     const success = graph.tryAddPoint(
@@ -21,7 +22,6 @@ function addRandomPoint() {
     );
     ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
     graph.draw(ctx);
-    console.log(success)
 }
 myCanvas.width = 800;
 myCanvas.height = 800;
