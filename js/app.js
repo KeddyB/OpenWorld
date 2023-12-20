@@ -1,3 +1,17 @@
+function addRandomSegment() {
+    const index1 = Math.floor(Math.random() * graph.points.lenght)
+    const index2 = Math.floor(Math.random() * graph.points.lenght)
+
+    let success = false
+    if (index1 != index2) {
+        success = true
+        graph.addSegment(
+            new Segment(graph.points[index1], graph.points[index2])
+        )
+    }
+    ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+    graph.draw(ctx);
+}
 function addRandomPoint() {
     const success = graph.tryAddPoint(
         new Point(

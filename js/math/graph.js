@@ -16,6 +16,9 @@ class Graph {
         }
         return false
     }
+    addSegment(seg){
+        this.segments.push(seg)
+    }
     draw(ctx) {
         for (const seg of this.segments) {
             seg.draw(ctx)
