@@ -1,5 +1,5 @@
 function addRandomPoint() {
-    graph.addPoint(
+    const success = graph.tryAddPoint(
       new Point(
         Math.random() * myCanvas.width,
         Math.random() * myCanvas.height
@@ -7,6 +7,7 @@ function addRandomPoint() {
     );
     ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
     graph.draw(ctx);
+    console.log(success)
   }
   myCanvas.width = 800;
   myCanvas.height = 800;

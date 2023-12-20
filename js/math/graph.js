@@ -9,6 +9,13 @@ class Graph {
     containsPoint(point){
         return this.points.find((p) => p.equals(point))
     }
+    tryAddPoint(point){
+        if(this.points.push(point)){
+            this.addPoint(point)
+            return true
+        }
+        return false
+    }
     draw(ctx) {
         for (const seg of this.segments) {
             seg.draw(ctx)
