@@ -1,14 +1,35 @@
+function clearCanvas(){
+    graph.dispose()
+    ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+    graph.draw(ctx);
+}
+function removePoint(){
+    if(graph.points.length == 0){
+        console.log("no points")
+        return
+    }
+    const index = Math.floor(Math.random() * graph.points.length)
+    graph.removePoints(graph.points[index])
+    ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+    graph.draw(ctx);
+}
+function removeSegment(){
+    if(graph.segments.length == 0){
+        console.log("no segment")
+        return
+    }
+    const index = Math.floor(Math.random() * graph.points.length)
+    graph.removeSegment(graph.segments[index])
+    ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+    graph.draw(ctx);
+}
 function addRandomSegment() {
     const index1 = Math.floor(Math.random() * graph.points.length)
     const index2 = Math.floor(Math.random() * graph.points.length)
 
-    let success = false
-    if (index1 != index2) {
-        success = true
-        graph.addSegment(
-            new Segment(graph.points[index1], graph.points[index2])
-        )
-    }
+    const success = graph.tryAddSegment(
+        new Segment(graph.points[index1], graph.points[index2])
+    )
     ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
     graph.draw(ctx);
     console.log(success)
