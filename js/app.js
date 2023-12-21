@@ -74,5 +74,5 @@ function dispose(){
     graphEditor.dispose()
 }
 function save(){
-
+    localStorage.setItem("graph", JSON.stringify(graph))
 }
