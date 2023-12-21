@@ -44,8 +44,8 @@ function addRandomPoint() {
     ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
     graph.draw(ctx);
 }
-myCanvas.width = 800;
-myCanvas.height = 800;
+myCanvas.width = 600;
+myCanvas.height = 600;
 
 const ctx = myCanvas.getContext("2d");
 
@@ -60,12 +60,19 @@ const s3 = new Segment(p3, p2);
 const s4 = new Segment(p1, p4);
 
 const graph = new Graph([p1, p2, p3, p4], [s1, s2, s3, s4]);
-const graphEditor = new GraphEditor(myCanvas, graph)
+const viewport = new ViewPort(myCanvas)
+const graphEditor = new GraphEditor(viewport, graph)
 
 animate()
 
 function animate(){
     ctx.clearRect(0, 0, myCanvas.width, myCanvas.height)
+    ctx.save()
+    ctx.translate(viewport.center.x, viewport.center.y)
+    ctx.scale(1 / viewport.zoom, 1 / viewport.zoom)
+    const offset = viewport.getOffset()
+    ctx.translate(offset.x, offset.y)
     graphEditor.display()
+    ctx.restore()
     requestAnimationFrame(animate)
 }
