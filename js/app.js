@@ -60,7 +60,7 @@ animate()
 function animate(){
     viewport.reset()
     graphEditor.display()
-    new Envelope(graph.segments[0], 80).draw(ctx)
+    new Envelope(graph.segments[0], 100, 200).draw(ctx)
     requestAnimationFrame(animate)
 }
 function dispose(){
