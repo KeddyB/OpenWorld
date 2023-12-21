@@ -13,7 +13,8 @@ class GraphEditor{
             const mouse = new Point(evt.offsetX, evt.offsetY)
             this.hovered = getNearestPoint(mouse, this.graph.points)
             if(this.hovered){
-                this.selected= this.hovered
+                this.selected = this.hovered
+                return
             }
             this.graph.addPoint(mouse)
             this.selected = mouse
