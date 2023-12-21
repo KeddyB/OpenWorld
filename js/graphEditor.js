@@ -29,11 +29,10 @@ class GraphEditor {
             if (this.hovered) {
                 this.#select(this.hovered)
                 this.dragging = true
-                this.selected = this.hovered
                 return
             }
             this.graph.addPoint(this.mouse)
-            this.#select(this.hovered)
+            this.#select(this.mouse)
             this.hovered = this.mouse
         }
     }
