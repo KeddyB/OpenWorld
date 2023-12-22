@@ -52,6 +52,7 @@ const ctx = myCanvas.getContext("2d");
 const graphString = localStorage.getItem("graph")
 const graphInfo = graphString ? JSON.parse(graphString) : null
 const graph = graphInfo ? Graph.load(graphInfo) : new Graph()
+const world = new World(graph)
 const viewport = new ViewPort(myCanvas)
 const graphEditor = new GraphEditor(viewport, graph)
 
@@ -59,6 +60,8 @@ animate()
 
 function animate(){
     viewport.reset()
+    world.generate()
+    world.draw(ctx)
     graphEditor.display()
     new Envelope(graph.segments[0], 100, 200).draw(ctx)
     requestAnimationFrame(animate)
