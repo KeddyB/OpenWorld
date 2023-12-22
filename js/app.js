@@ -63,7 +63,6 @@ function animate(){
     world.generate()
     world.draw(ctx)
     graphEditor.display()
-    new Envelope(graph.segments[0], 100, 200).draw(ctx)
     requestAnimationFrame(animate)
 }
 function dispose(){
