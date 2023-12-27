@@ -62,6 +62,7 @@ function animate(){
     viewport.reset()
     world.generate()
     world.draw(ctx)
+    ctx.globalAlpha = 0.1
     graphEditor.display()
     requestAnimationFrame(animate)
 }

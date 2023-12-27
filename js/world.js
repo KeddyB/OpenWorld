@@ -1,11 +1,22 @@
 class World{
-    constructor(graph, roadWidth = 100, roadRoundness = 20){
+    constructor(
+            graph, 
+            roadWidth = 100, 
+            roadRoundness = 20,
+            buildingWidth = 150,
+            buildingMinLength = 150,
+            spacing = 50
+        ){
         this.graph = graph
         this.roadWidth = roadWidth
         this.roadRoundness = roadRoundness
+        this.buildingWidth = buildingWidth
+        this.buildingMinLength = buildingMinLength
+        this.spacing = spacing
 
         this.envelopes = []
         this.roadBoarders = []
+        this.buildings = []
 
         this.generate()
     }
@@ -17,13 +28,34 @@ class World{
             )
         }
         this.roadBoarders = Polygon.union(this.envelopes.map((e) => e.poly))
+        this.buildings = this.#generateBuildings()
+    }
+    #generateBuildings(){
+        const tempEnvelopes = []
+        for (const seg of this.graph.segments){
+            tempEnvelopes.push(
+                new Envelope(
+                    seg,
+                    this.roadWidth + this.buildingWidth + this.spacing * 2,
+                    this.roadRoundness
+                )
+            )
+        }
+        const guides = Polygon.union(tempEnvelopes.map((e) => e.poly))
+        return guides
     }
     draw(ctx){
         for(const env of this.envelopes){
-            env.draw(ctx, { fill: "#BBB", stroke: "#BBB"})
+            env.draw(ctx, { fill: "#BBB", stroke: "#BBB", lineWidth: 15})
+        }
+        for (const seg of this.graph.segments){
+            seg.draw(ctx, { color: "white", width: 4, dash: [10, 10]})
         }
         for(const seg of this.roadBoarders){
             seg.draw(ctx, {color: "white", width: 4})
+        }
+        for(const bld of this.buildings){
+            bld.draw(ctx)
         }
     }
 }
