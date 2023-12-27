@@ -15,17 +15,11 @@ class World{
                 new Envelope (seg, this.roadWidth, this.roadRoundness)
             )
         }
-        this.intersections = Polygon.break(
-            this.envelopes[0].poly,
-            this.envelopes[1].poly
-        )
+        Polygon.multiBreak(this.envelopes.map((e) => e.poly))
     }
     draw(ctx){
         for(const env of this.envelopes){
             env.draw(ctx)
-        }
-        for(const int of this.intersections){
-            int.draw(ctx, { color : "red", size : 6})
         }
     }
 }

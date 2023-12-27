@@ -24,5 +24,6 @@ class Envelope{
     }
     draw(ctx){
         this.poly.draw(ctx)
+        this.poly.drawSegments(ctx)
     }
 }
