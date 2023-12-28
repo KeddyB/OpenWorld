@@ -73,6 +73,9 @@ class Polygon{
         const midpoint = average(seg.p1, seg.p2)
         return this.containsPoint(midpoint)
     }
+    distanceToPoint(point){
+        return Math.min(...this.seg.map((s) => s.distanceToPoint(point)))
+    }
     intersectsPoly(poly){
         for(let s1 of this.segments){
             for(let s2 of poly.segments){
