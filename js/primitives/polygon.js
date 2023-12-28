@@ -74,7 +74,7 @@ class Polygon{
         return this.containsPoint(midpoint)
     }
     distanceToPoint(point){
-        return Math.min(...this.seg.map((s) => s.distanceToPoint(point)))
+        return Math.min(...this.segments.map((s) => s.distanceToPoint(point)))
     }
     intersectsPoly(poly){
         for(let s1 of this.segments){
