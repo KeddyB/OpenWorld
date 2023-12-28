@@ -59,7 +59,7 @@ class World{
             const dir = seg.directionVector()
 
             let q1 = seg.p1
-            let q2 = add(q1, secale(dir, buildingLenth))
+            let q2 = add(q1, scale(dir, buildingLenth))
             supports.push(new Segment(q1, q2))
         }
         return supports
