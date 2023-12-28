@@ -42,7 +42,27 @@ class World{
             )
         }
         const guides = Polygon.union(tempEnvelopes.map((e) => e.poly))
-        return guides
+
+        for (let i = 0; i < guides.length; i++){
+            const seg = guides[i];
+            if(seg.length() < this.buildingMinLength){
+                guides.splice(i, 1)
+                i--
+            }
+        }
+        const supports = []
+        for(let seg of guides){
+            const len = seg.length() + this.spacing
+            const buildingCount = Math.floor(len /  (this.buildingMinLength + this.spacing))
+            const buildingLenth = len / buildingCount - this.spacing
+
+            const dir = seg.directionVector()
+
+            let q1 = seg.p1
+            let q2 = add(q1, secale(dir, buildingLenth))
+            supports.push(new Segment(q1, q2))
+        }
+        return supports
     }
     draw(ctx){
         for(const env of this.envelopes){

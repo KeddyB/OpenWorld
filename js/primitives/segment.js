@@ -3,6 +3,12 @@ class Segment{
         this.p1 = p1
         this.p2 = p2 
     }
+    length(){
+        return distance(this.p1, this.p2)
+    }
+    directionVector(){
+        return normalize(substract(this.p2, this.p1))
+    }
     equals(seg){
         return (this.includes(seg.p1) && this.includes(seg.p2))
     }
