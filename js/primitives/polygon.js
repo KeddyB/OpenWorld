@@ -73,7 +73,11 @@ class Polygon{
         const midpoint = average(seg.p1, seg.p2)
         return this.containsPoint(midpoint)
     }
-    
+    intersectPoly(poly){
+        for(let s1 of this.segments){
+            
+        }
+    }
     drawSegments(ctx){
         for (const seg of this.segments){
             seg.draw(ctx, {color: getRandomColor(), width: 5})
