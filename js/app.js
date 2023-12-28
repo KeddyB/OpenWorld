@@ -56,11 +56,16 @@ const world = new World(graph)
 const viewport = new ViewPort(myCanvas)
 const graphEditor = new GraphEditor(viewport, graph)
 
+let oldGraphHash = graph.hash()
+
 animate()
 
 function animate(){
     viewport.reset()
-    world.generate()
+    if(graph.hash() != oldGraphHash){
+        world.generate()
+        oldGraphHash = graph.hash()
+    }
     world.draw(ctx)
     ctx.globalAlpha = 0.1
     graphEditor.display()
