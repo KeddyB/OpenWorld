@@ -34,7 +34,7 @@ class World{
         this.buildings = this.#generateBuildings()
         this.trees = this.#generateTrees()
     }
-    #generateTrees(count = 10){
+    #generateTrees(){
         const points = [
             ...this.roadBoarders.map((s) => [s.p1, s.p2]).flat(),
             ...this.buildings.map((b) => b.points).flat()
@@ -49,7 +49,8 @@ class World{
             ...this.envelopes.map((e) => e.poly)
         ]
         const trees = []
-        while (trees.length < count){
+        let tryCount = 0
+        while (tryCount < 100){
             const p = new Point(
                 lerp(left, right, Math.random()),
                 lerp(bottom, top, Math.random())
@@ -71,7 +72,9 @@ class World{
             }
             if(keep){
                 trees.push(p)
+                tryCount = 0
             }
+            tryCount++
         }
         return trees
     }
