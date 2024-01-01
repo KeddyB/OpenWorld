@@ -81,7 +81,7 @@ class World{
                 keep = closeToSomething
             }
             if(keep){
-                trees.push(p)
+                trees.push(new Tree(p, this.treeSize))
                 tryCount = 0
             }
             tryCount++
@@ -153,7 +153,7 @@ class World{
             seg.draw(ctx, {color: "white", width: 4})
         }
         for(const tree of this.trees){
-            tree.draw(ctx)
+            tree.draw(ctx, {size: this.treeSize, color: "rgba(0,0,0,.5"})
         }
         for(const bld of this.buildings){
             bld.draw(ctx)
