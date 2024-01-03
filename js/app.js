@@ -55,6 +55,7 @@ const graph = graphInfo ? Graph.load(graphInfo) : new Graph()
 const world = new World(graph)
 const viewport = new ViewPort(myCanvas)
 const graphEditor = new GraphEditor(viewport, graph)
+const stopEditor = new StopEditor(viewport, world)
 
 let oldGraphHash = graph.hash()
 
@@ -72,6 +73,7 @@ function animate(){
     world.draw(ctx, viewPoint)
     ctx.globalAlpha = 0.1
     graphEditor.display()
+    stopEditor.display()
     requestAnimationFrame(animate)
 }
 function dispose(){
@@ -91,6 +93,7 @@ function setMode(mode){
         case "stop":
             stopBtn.style.background = "white"
             stopBtn.style.filter = ""
+            stopEditor.enable()
             break
     }
 }
@@ -98,6 +101,7 @@ function disableEditors(){
     graphBtn.style.background = "gray"
     graphBtn.style.filter = "grayscale(100%)"
     graphEditor.disable()
+    stopEditor.diable()
     stopBtn.style.background = "gray"
     stopBtn.style.filter = "grayscale(100%)"
 }
