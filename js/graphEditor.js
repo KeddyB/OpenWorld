@@ -9,13 +9,24 @@ class GraphEditor {
         this.hovered = null
         this.dragging = true
         this.mouse = null
+    }
+    enable(){
         this.#addEventListeners()
+    }
+    disable(){
+        this.#removeEventListeners()
     }
     #addEventListeners() {
         this.canvas.addEventListener("mousedown", this.#handleMouseDown.bind(this))
         this.canvas.addEventListener("mousemove", this.#handleMouseMove.bind(this))
         this.canvas.addEventListener("contextmenu", (evt) => evt.preventDefault())
         this.canvas.addEventListener("mouseup", () => { this.dragging = false })
+    }
+    #removeEventListeners() {
+        this.canvas.removeEventListener("mousedown", this.#handleMouseDown.bind(this))
+        this.canvas.removeEventListener("mousemove", this.#handleMouseMove.bind(this))
+        this.canvas.removeEventListener("contextmenu", (evt) => evt.preventDefault())
+        this.canvas.removeEventListener("mouseup", () => { this.dragging = false })
     }
     #handleMouseDown(evt){
         if (evt.button == 2) { // right click
