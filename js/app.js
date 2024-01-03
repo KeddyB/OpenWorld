@@ -58,7 +58,7 @@ const graphEditor = new GraphEditor(viewport, graph)
 
 let oldGraphHash = graph.hash()
 
-setMopd
+setMode
 
 animate()
 
