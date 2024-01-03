@@ -58,6 +58,8 @@ const graphEditor = new GraphEditor(viewport, graph)
 
 let oldGraphHash = graph.hash()
 
+setMopd
+
 animate()
 
 function animate(){
@@ -77,4 +79,23 @@ function dispose(){
 }
 function save(){
     localStorage.setItem("graph", JSON.stringify(graph))
+}
+function setMode(mode){
+    disableEditors()
+    switch(mode){
+        case "graph":
+            graphBtn.style.background = "white"
+            graphBtn.style.filter = ""
+            break
+        case "stop":
+            stopBtn.style.background = "white"
+            stopBtn.style.filter = ""
+            break
+    }
+}
+function disableEditors(){
+    graphBtn.style.background = "gray"
+    graphBtn.style.filter = "grayscale(100%)"
+    stopBtn.style.background = "gray"
+    stopBtn.style.filter = "grayscale(100%)"
 }
