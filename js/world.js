@@ -20,7 +20,7 @@ class World{
         this.roadBoarders = []
         this.buildings = []
         this.trees = []
-        this.landGuides = []
+        this.laneGuides = []
 
         this.generate()
     }
@@ -34,8 +34,8 @@ class World{
         this.roadBoarders = Polygon.union(this.envelopes.map((e) => e.poly))
         this.buildings = this.#generateBuildings()
         this.trees = this.#generateTrees()
-        this.landGuides.length = 0
-        this.landGuides.push(...this.#generateLaneGuides())
+        this.laneGuides.length = 0
+        this.laneGuides.push(...this.#generateLaneGuides())
     }
     #generateLaneGuides(){
         const tempEnvelopes = []
@@ -176,9 +176,6 @@ class World{
         )
         for(const item of items){
             item.draw(ctx, viewPoint)
-        }
-        for(const seg of this.landGuides){
-            seg.draw(ctx, { color: "red"})
         }
     }
 }

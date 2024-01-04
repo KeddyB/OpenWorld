@@ -13,5 +13,12 @@ class Stop{
     }
     draw(ctx){
         this.poly.draw(ctx)
+        ctx.save()
+        ctx.translate(this.center.x, this.center.y)
+        ctx.rotate(angle(this.directionVector))
+
+        ctx.beginPath()
+        ctx.textBaseline = "middle"
+        ctx.textAlign = "center"
     }
 }
