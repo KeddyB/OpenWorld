@@ -101,7 +101,7 @@ function disableEditors(){
     graphBtn.style.background = "gray"
     graphBtn.style.filter = "grayscale(100%)"
     graphEditor.disable()
-    stopEditor.diable()
+    stopEditor.disable()
     stopBtn.style.background = "gray"
     stopBtn.style.filter = "grayscale(100%)"
 }
