@@ -44,7 +44,9 @@ function dot(p1, p2){
 function scale(p, scaler) {
     return new Point(p.x * scaler, p.y * scaler);
 }
-
+function perpendicular(p){
+    return new Point(-p.y, p.x)
+}
 function translate(loc, angle, offset) {
     return new Point(
         loc.x + Math.cos(angle) * offset,
