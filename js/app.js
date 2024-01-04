@@ -1,10 +1,10 @@
-function clearCanvas(){
+function clearCanvas() {
     graph.dispose()
     ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
     graph.draw(ctx);
 }
-function removePoint(){
-    if(graph.points.length == 0){
+function removePoint() {
+    if (graph.points.length == 0) {
         console.log("no points")
         return
     }
@@ -13,8 +13,8 @@ function removePoint(){
     ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
     graph.draw(ctx);
 }
-function removeSegment(){
-    if(graph.segments.length == 0){
+function removeSegment() {
+    if (graph.segments.length == 0) {
         console.log("no segment")
         return
     }
@@ -63,9 +63,9 @@ setMode("graph")
 
 animate()
 
-function animate(){
+function animate() {
     viewport.reset()
-    if(graph.hash() != oldGraphHash){
+    if (graph.hash() != oldGraphHash) {
         world.generate()
         oldGraphHash = graph.hash()
     }
@@ -76,16 +76,16 @@ function animate(){
     stopEditor.display()
     requestAnimationFrame(animate)
 }
-function dispose(){
+function dispose() {
     graphEditor.dispose()
     world.markings.length = 0
 }
-function save(){
+function save() {
     localStorage.setItem("graph", JSON.stringify(graph))
 }
-function setMode(mode){
+function setMode(mode) {
     disableEditors()
-    switch(mode){
+    switch (mode) {
         case "graph":
             graphBtn.style.background = "white"
             graphBtn.style.filter = ""
@@ -96,9 +96,14 @@ function setMode(mode){
             stopBtn.style.filter = ""
             stopEditor.enable()
             break
+        case "crossing":
+            crossingBtn.style.background = "white"
+            crossingBtn.style.filter = ""
+            stopEditor.enable()
+            break
     }
 }
-function disableEditors(){
+function disableEditors() {
     graphBtn.style.background = "gray"
     graphBtn.style.filter = "grayscale(100%)"
     graphEditor.disable()
