@@ -78,6 +78,7 @@ function animate(){
 }
 function dispose(){
     graphEditor.dispose()
+    world.markings.length = 0
 }
 function save(){
     localStorage.setItem("graph", JSON.stringify(graph))

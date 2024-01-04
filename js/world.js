@@ -22,6 +22,7 @@ class World{
         this.trees = []
         this.laneGuides = []
 
+        this.markings = []
         this.generate()
     }
     generate(){
@@ -162,6 +163,9 @@ class World{
     draw(ctx, viewPoint){
         for(const env of this.envelopes){
             env.draw(ctx, { fill: "#BBB", stroke: "#BBB", lineWidth: 15})
+        }
+        for(const marking of this.markings){
+            marking.draw(ctx)
         }
         for (const seg of this.graph.segments){
             seg.draw(ctx, { color: "white", width: 4, dash: [10, 10]})

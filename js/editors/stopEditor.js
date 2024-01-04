@@ -8,6 +8,8 @@ class StopEditor{
 
         this.mouse = null
         this.intent = null
+
+        this.markings = world.markings
     }
     enable(){
         this.#addEventListeners()
@@ -30,23 +32,21 @@ class StopEditor{
         this.canvas.removeEventListener("contextmenu", this.boundContextMenu)
     }
     #handleMouseDown(evt){
-    //     if (evt.button == 2) { // right click
-    //         if (this.selected) {
-    //             this.selected = null
-    //         } else if (this.hovered) {
-    //             this.#removePoints(this.hovered)
-    //         }
-    //     }
-    //     if (evt.button == 0) { //left click
-    //         if (this.hovered) {
-    //             this.#select(this.hovered)
-    //             this.dragging = true
-    //             return
-    //         }
-    //         this.graph.addPoint(this.mouse)
-    //         this.#select(this.mouse)
-    //         this.hovered = this.mouse
-    //     }
+        if (evt.button == 0) {
+            if(this.intent){
+                this.markings.push(this.intent)
+                this.intent = null
+            }
+        }
+        if(evt.button == 2){
+            for(let i = 0; i < this.markings.length; i++){
+                const poly = this.markings[i].poly
+                if(poly.containsPoint(this.mouse)){
+                    this.markings.splice(i, 1)
+                    return
+                }
+            }
+        }
     }
     #handleMouseMove(evt) {
         this.mouse = this.viewport.getMouse(evt, true)
