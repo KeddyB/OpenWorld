@@ -54,9 +54,13 @@ const graphInfo = graphString ? JSON.parse(graphString) : null
 const graph = graphInfo ? Graph.load(graphInfo) : new Graph()
 const world = new World(graph)
 const viewport = new ViewPort(myCanvas)
-const graphEditor = new GraphEditor(viewport, graph)
-const stopEditor = new StopEditor(viewport, world)
-const crossingEditor = new CrossingEditor(viewport, world)
+
+const tools = {
+    graph: { button: graphBtn, editor: new GraphEditor(viewport, graph) },
+    stop: { button: stopBtn, editor: new StopEditor(viewport, world) },
+    crossing: { button: crossingBtn, editor: new CrossingEditor(viewport, world) },
+    start: {button: startBtn, editor: new StartEditor(viewport, world)}
+}
 
 let oldGraphHash = graph.hash()
 
@@ -73,13 +77,13 @@ function animate() {
     const viewPoint = scale(viewport.getOffset(), -1)
     world.draw(ctx, viewPoint)
     ctx.globalAlpha = 0.1
-    graphEditor.display()
-    stopEditor.display()
-    crossingEditor.display()
+    for (const tool of Object.values(tools)) {
+        tool.editor.display()
+    }
     requestAnimationFrame(animate)
 }
 function dispose() {
-    graphEditor.dispose()
+    tools["graph"].editor.dispose()
     world.markings.length = 0
 }
 function save() {
@@ -87,32 +91,14 @@ function save() {
 }
 function setMode(mode) {
     disableEditors()
-    switch (mode) {
-        case "graph":
-            graphBtn.style.background = "white"
-            graphBtn.style.filter = ""
-            graphEditor.enable()
-            break
-        case "stop":
-            stopBtn.style.background = "white"
-            stopBtn.style.filter = ""
-            stopEditor.enable()
-            break
-        case "crossing":
-            crossingBtn.style.background = "white"
-            crossingBtn.style.filter = ""
-            crossingEditor.enable()
-            break
-    }
+    tools[mode].button.style.background = "white"
+    tools[mode].button.style.filter = ""
+    tools[mode].editor.enable()
 }
 function disableEditors() {
-    graphBtn.style.background = "gray"
-    graphBtn.style.filter = "grayscale(100%)"
-    graphEditor.disable()
-    stopBtn.style.background = "gray"
-    stopBtn.style.filter = "grayscale(100%)"
-    stopEditor.disable()
-    crossingBtn.style.background = "gray"
-    crossingBtn.style.filter = "grayscale(100%)"
-    crossingEditor.disable()
+    for (const tool of Object.values(tools)) {
+        tool.button.style.background = "gray"
+        tool.button.style.filter = "grayscale(100%)"
+        tool.editor.disable()
+    }
 }
