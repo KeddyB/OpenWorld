@@ -56,6 +56,7 @@ const world = new World(graph)
 const viewport = new ViewPort(myCanvas)
 const graphEditor = new GraphEditor(viewport, graph)
 const stopEditor = new StopEditor(viewport, world)
+const crossingEditor = new CrossingEditor(viewport, world)
 
 let oldGraphHash = graph.hash()
 
@@ -74,6 +75,7 @@ function animate() {
     ctx.globalAlpha = 0.1
     graphEditor.display()
     stopEditor.display()
+    crossingEditor.display()
     requestAnimationFrame(animate)
 }
 function dispose() {
@@ -99,7 +101,7 @@ function setMode(mode) {
         case "crossing":
             crossingBtn.style.background = "white"
             crossingBtn.style.filter = ""
-            stopEditor.enable()
+            crossingEditor.enable()
             break
     }
 }
@@ -107,7 +109,10 @@ function disableEditors() {
     graphBtn.style.background = "gray"
     graphBtn.style.filter = "grayscale(100%)"
     graphEditor.disable()
-    stopEditor.disable()
     stopBtn.style.background = "gray"
     stopBtn.style.filter = "grayscale(100%)"
+    stopEditor.disable()
+    crossingBtn.style.background = "gray"
+    crossingBtn.style.filter = "grayscale(100%)"
+    crossingEditor.disable()
 }
