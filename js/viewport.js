@@ -3,7 +3,7 @@ class ViewPort {
         this.canvas = canvas
         this.ctx = canvas.getContext("2d")
 
-        this.zoom = 1
+        this.zoom = 3.5
         this.center = new Point(canvas.width / 2, canvas.height / 2)
         this.offset = scale(this.center, -1)
 
