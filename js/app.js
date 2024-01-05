@@ -54,7 +54,7 @@ const worldInfo = worldString ? JSON.parse(worldString) : null
 let world = worldInfo ? World.load(worldInfo) : new World(new Graph())
 const graph = world.graph
 
-const viewport = new ViewPort(myCanvas)
+const viewport = new ViewPort(myCanvas, world.zoom, world.offset)
 
 const tools = {
     graph: { button: graphBtn, editor: new GraphEditor(viewport, graph) },
@@ -88,6 +88,8 @@ function dispose() {
     world.markings.length = 0
 }
 function save() {
+    world.zoom = viewport.zoom
+    world.offset = viewport.offset
     const element = document.createElement("a")
     element.setAttribute(
         "href",
