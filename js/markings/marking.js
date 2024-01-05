@@ -1,5 +1,5 @@
-class Marking{
-    constructor(center, directionVector, width, height){
+class Marking {
+    constructor(center, directionVector, width, height) {
         this.center = center
         this.directionVector = directionVector
         this.width = width
@@ -12,8 +12,27 @@ class Marking{
         this.poly = new Envelope(this.support, width, 0).poly
 
         this.border = this.poly.segments[2]
+        this.type = "marking"
     }
-    draw(ctx){
+    static load(info) {
+        const point = new Point(info.center.x, info.center.y)
+        const dir = new Point(info.directionVector.x, info.directionVector.y)
+        switch (info.type) {
+            case "crossing":
+                return new Crossing(point, dir, info.width, info.height)
+                break
+            case "stop sign":
+                return new Stop(point, dir, info.width, info.height)
+                break
+            case "car":
+                return new Start(point, dir, info.width, info.height)
+                break
+            case "marking":
+                return new Marking(point, dir, info.width, info.height)
+                break
+        }
+    }
+    draw(ctx) {
         this.poly.draw(ctx)
     }
 }

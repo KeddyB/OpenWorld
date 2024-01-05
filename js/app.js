@@ -88,6 +88,13 @@ function dispose() {
     world.markings.length = 0
 }
 function save() {
+    const element = document.createElement("a")
+    element.setAttribute(
+        "href",
+        "data:application/json;charset=utf-8," +
+            encodeURIComponent(JSON.stringify(world))
+    )
+    const fileName = "name.world"
     localStorage.setItem("world", JSON.stringify(world))
 }
 function setMode(mode) {
