@@ -68,7 +68,12 @@ function translate(loc, angle, offset) {
 function angle(p) {
     return Math.atan2(p.y, p.x);
 }
-
+function getFake3DPoint(point, viewPoint, height) {
+   const dir = normalize(subtract(point, viewPoint));
+   const dist = distance(point, viewPoint);
+   const scaler = Math.atan(dist / 300) / (Math.PI / 2);
+   return add(point, scale(dir, height * scaler));
+}
 function getIntersection(A, B, C, D) {
     const tTop = (D.x - C.x) * (A.y - C.y) - (D.y - C.y) * (A.x - C.x);
     const uTop = (C.y - A.y) * (A.x - B.x) - (C.x - A.x) * (A.y - B.y);

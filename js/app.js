@@ -103,8 +103,8 @@ function save() {
 
     localStorage.setItem("world", JSON.stringify(world))
 }
-function load(event){
-    const file = event.target.file[0]
+function load(e){
+    const file = e.target.file[0]
 
     if(!file){
         alert("No file selected")

@@ -35,14 +35,14 @@ class GraphEditor {
         this.canvas.removeEventListener("contextmenu", this.boundContextMenu)
     }
     #handleMouseDown(evt){
-        if (evt.button == 2) { // right click
+        if (evt.button == 2) {
             if (this.selected) {
                 this.selected = null
             } else if (this.hovered) {
                 this.#removePoints(this.hovered)
             }
         }
-        if (evt.button == 0) { //left click
+        if (evt.button == 0) {
             if (this.hovered) {
                 this.#select(this.hovered)
                 this.dragging = true

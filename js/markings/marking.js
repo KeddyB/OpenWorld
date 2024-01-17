@@ -20,16 +20,15 @@ class Marking {
         switch (info.type) {
             case "crossing":
                 return new Crossing(point, dir, info.width, info.height)
-                break
+                
             case "stop sign":
                 return new Stop(point, dir, info.width, info.height)
-                break
+                
             case "car":
                 return new Start(point, dir, info.width, info.height)
-                break
+                
             case "marking":
                 return new Marking(point, dir, info.width, info.height)
-                break
         }
     }
     draw(ctx) {
